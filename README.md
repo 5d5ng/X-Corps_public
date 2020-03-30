@@ -1,2 +1,7 @@
 # X-Corps_public
-PKNU X-Corps project by LACUC
+
+###### 부경대학교 실전문제연구단 프로젝트 X-Corps
+
+###### 
+
+## Dapp on Hyperledger Fabric
