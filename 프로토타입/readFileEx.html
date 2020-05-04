@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> New Document </title>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+        function fileinfo() {
+            var file = document.getElementById("file").files[0];
+
+            document.getElementById("table").innerHTML += "<tr><td>파일이름</td><td>" + file.name + "</td></tr>";
+            document.getElementById("table").innerHTML += "<tr><td>파일크기</td><td>" + file.size + "</td></tr>";
+            document.getElementById("table").innerHTML += "<tr><td>파일타입</td><td>" + file.type + "</td></tr>";
+            document.getElementById("table").innerHTML += "<tr><td>파일수정날짜</td><td>" + file.lastModifiedDate + "</td></tr>";
+
+
+        }
+        function fileread() {
+            var file = document.getElementById("file").files[0];
+            // console.log(file);
+            var reader = new FileReader();
+            reader.readAsText(file, "utf-8");
+            reader.onload = function () {
+                var view = document.getElementById("content");
+
+                var str = reader.result;
+                strArray = str.split("\n");
+                console.log(strArray[0])
+                view.textContent = strArray[0];
+
+            };
+
+            reader.onerror = function (event) {
+                switch (event.target.error.code) {
+                    case error.NOT_FOUND_ERR:
+                        alert("읽을 파일을 찾지 못하였습니다.."); break;
+                    case error.SECURITY_ERR:
+                        alert("보안상 안전하지 않습니다.."); break;
+                    case error.ABORT_ERR:
+                        alert("읽기가 중지되었습니다."); break;
+                    case error.NOT_READABLE_ERR:
+                        alert("읽기 권한이 없습니다."); break;
+                    case error.ENCODING_ERR:
+                        alert("파일 용량이 상한을 초과하였습니다."); break;
+
+                }
+
+            };
+
+        }
+
+        var hw = document.getElementById('hw')
+
+        // fetch('./mytext.text')
+        // .then(response=> response.text())
+        // .then(text =>console.log(text))
+        
+        function readTextFile(file) {
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", file, false);
+
+            rawFile.onreadystatechange = function () {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status == 0) {
+                        var allText = rawFile.responseText;
+                        alert(allText);
+                    }
+                }
+            }
+            rawFile.send(null);
+        }
+        readTextFile("http://127.0.0.1:8080/Desktop/mytext.txt");
+      
+
+
+    </script>
+</head>
+
+<body>
+    <!-- <input id="file" type="file">
+    <input type="button" onclick="fileinfo()" value="파일 정보확인">
+    <input type="button" onclick="fileread()" value="파일 내용 확인">
+    <br />
+    <table id="table"></table>
+    <textarea id="content" readonly style="width:600px; height:500px;"></textarea> -->
+    <input type="button" id="hw" value="데이터 확인하기">
+</body>
+
+</html>
